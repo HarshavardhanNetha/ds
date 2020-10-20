@@ -12,13 +12,13 @@ void insert_at_tail(struct node**);
 void search(struct node*);
 
 int main(){
-	int option;
+	struct node* head = NULL;
 	while(1){
 		
+	int option;
 	printf("1. Insert at head\n2. Insert at tail\n3. Insert at postion\n4. Insert at middle\n5. Search\n6. Remove an element\n7. Remove at postion\n8. Print\nEnter your option:");
 	scanf("%d",&option);
 	
-	struct node* head = NULL;
 
 	switch(option){
 		case 1:{
@@ -42,14 +42,17 @@ void insert_at_head(struct node** head){
 	scanf("%d",&value);
 	
 	if(*head==NULL){
-		struct node* head=(struct node*)malloc(sizeof(struct node));
-		
-		head->ele = value;
-		head->next=NULL;
+		*head=(struct node*)malloc(sizeof(struct node));
+		printf("Inserted!\n");
+		(*head)->ele = value;
+		(*head)->next=NULL;
 	}
 	else{
-		head->ele=value;
-		head->next=*head;
+		struct node* temp;
+		temp=(struct node*)malloc(sizeof(struct node));
+		temp->ele=value;
+		temp->next=*head;
+		*head=temp;
 	}
 }
 

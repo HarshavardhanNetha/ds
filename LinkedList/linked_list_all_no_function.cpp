@@ -12,6 +12,8 @@ void insert_at_tail();
 void insert_at_pos(int,int);
 void insert_at_mid(int);
 void search();
+void delete_ele(int);
+void delete_pos(int,int);
 int getLength();
 bool search(int);
 
@@ -65,6 +67,32 @@ int main(){
 			}
 			else
 				printf("Not found!\n");
+			break;
+		}
+		case 6:{
+			int x;
+			if(getLength()==0){
+				printf("Linked list is empty!\n");
+			}
+			else{
+				printf("Enter which element to remove:");
+				scanf("%d",&x);
+				delete_ele(x);
+			}
+			
+			break;
+		}
+		case 7:{
+			int x,c;
+			c=getLength();
+			if(c==0){
+				printf("Linked list is empty!\n");
+			}
+			else{
+				printf("Enter which position to remove:");
+				scanf("%d",&x);
+				delete_pos(x,c);
+			}
 			break;
 		}
 		case 8:{
@@ -137,7 +165,19 @@ int getLength(){
 
 void insert_at_pos(int x,int c){
 	int i=1;
-	if(x<c){
+	if(x==1){
+		struct node* new_node;
+		
+		new_node=(struct node*)malloc(sizeof(struct node));
+		printf("Enter element:");
+		int value;
+		scanf("%d",&value);
+		
+		new_node->ele=value;
+		new_node->next=head;
+		head=new_node;
+	}
+	else if(x<=c && x!=0){
 		struct node* new_node;
 		struct node* prev;
 		new_node=(struct node*)malloc(sizeof(struct node));
@@ -156,7 +196,7 @@ void insert_at_pos(int x,int c){
 		prev->next=new_node;
 	}
 	else{
-		printf("Not in range!");
+		printf("Enter valid range!\n");
 	}
 }
 
@@ -190,4 +230,60 @@ bool search(int a){
 		temp=temp->next;
 	}
 	return false;
+}
+//act_node = actual node
+//prev_node = previous node
+void delete_ele(int x){
+	struct node* act_node = head;
+	struct node* prev_node = head;
+	struct node* temp=head;
+	
+	int flag=0;
+	while(temp!=NULL){
+		if(temp->ele==x){
+			act_node=temp;
+			flag=1;
+		}
+		temp=temp->next;
+	}
+	if(flag==0){
+		printf("Element not found!\n");
+		return ;
+	}
+	if(head->ele==x){
+		head=head->next;
+	}
+	else{
+		while(prev_node->next!=act_node){
+			prev_node=prev_node->next;
+		}
+		prev_node->next=act_node->next;
+	}
+}
+
+void delete_pos(int x,int c){
+	struct node* act_node = head;
+	struct node* prev_node = head;
+	struct node* temp=head;
+	
+	int j=1,i=1;
+	
+	if(x==1){
+		head=head->next;
+	}
+	else if(x<=c && x!=0){
+		while(j<x){
+			temp=temp->next;
+			j++;
+		}
+		act_node=temp;
+		while(i<x-1){
+			prev_node=prev_node->next;
+			i++;
+		}
+		prev_node->next=act_node->next;
+	}
+	else{
+		printf("Enter valid range!\n");
+	}
 }
