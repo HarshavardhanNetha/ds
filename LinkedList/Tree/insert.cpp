@@ -17,7 +17,6 @@ struct tree* insert(struct tree*,int,struct queue*);
 struct queue* enqueue(struct queue*,struct tree*);
 struct tree* dequeue(struct queue**);
 void print(struct tree*);
-bool search(struct tree*,int);
 
 int main(){
 	struct tree* root=NULL;
@@ -42,15 +41,7 @@ int main(){
 				break;
 			}
 			case 3:{
-				bool check;
-				int ele;
-				printf("Enter to search:");
-				scanf("%d",&ele);
-				check=search(root,ele);
-				if(check)
-					printf("Found!\n");
-				else
-					printf("Not Found!\n");
+				
 				break;
 			}
 			case 4:{
@@ -151,43 +142,4 @@ void print(struct tree* root){
 		}
 	}
 	printf("\n");
-}
-
-bool search(struct tree* root,int x){
-	if(root==NULL){
-		return false;
-	}	
-	else{
-		struct queue* qq;
-		//qq=(struct queue*)malloc(10*sizeof(struct queue));				
-		struct tree* temp;
-		qq->front=0;
-		qq->rear=0;		
-		
-		if(root->e==x)
-			return true;
-
-		qq=enqueue(qq,root);
-		
-		while(1){
-			temp=dequeue(&qq);
-			
-			if(temp->prev!=NULL){
-				if(temp->prev->e==x)
-					return true;
-				enqueue(qq,temp->prev);
-			}
-			else
-				break;
-			if(temp->next!=NULL){
-				if(temp->next->e==x)
-					return true;
-				enqueue(qq,temp->next);
-			}
-			else
-				break;	
-		}
-	}
-	return false;
-	
 }
