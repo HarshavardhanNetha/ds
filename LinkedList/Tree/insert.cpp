@@ -8,7 +8,7 @@ struct tree{
 };
 
 struct queue{
-	struct tree* a[10];
+	struct tree* a[30];
 	int rear;
 	int front;
 };
@@ -17,11 +17,19 @@ struct tree* insert(struct tree*,int,struct queue*);
 struct queue* enqueue(struct queue*,struct tree*);
 struct tree* dequeue(struct queue**);
 void print(struct tree*);
+bool search(struct tree*,int);
+
+bool isEmpty(struct queue* q){
+	if(q->front==q->rear)
+		return true;
+	else
+		return false;
+}
 
 int main(){
 	struct tree* root=NULL;
 	struct queue* q;
-	q=(struct queue*)malloc(10*sizeof(struct queue));
+	q=(struct queue*)malloc(30*sizeof(struct queue));
 	
 	q->front=0;
 	q->rear=0;
@@ -41,7 +49,15 @@ int main(){
 				break;
 			}
 			case 3:{
-				
+				bool check;
+				int opt;
+				printf("Enter what to search:");
+				scanf("%d",&opt);
+				check=search(root,opt);
+				if(check)
+					printf("Found!\n");
+				else
+					printf("Not Found!\n");
 				break;
 			}
 			case 4:{
@@ -142,4 +158,38 @@ void print(struct tree* root){
 		}
 	}
 	printf("\n");
+}
+bool search(struct tree* root,int a){
+	struct queue* qq;
+	//qq=(struct queue*)malloc(10*sizeof(struct queue));				
+	struct tree* temp;
+	qq->front=0;
+	qq->rear=0;		
+	
+	//printf("%d ",root->e);
+	if(root->e==a){
+		return true;
+	}
+
+	qq=enqueue(qq,root);
+	
+	while(!isEmpty(qq)){
+		temp=dequeue(&qq);
+		
+		if(temp->prev!=NULL){
+			//printf("%d ",temp->prev->e);
+			if(temp->prev->e==a){
+				return true;
+			}
+			enqueue(qq,temp->prev);
+		}
+		if(temp->next!=NULL){
+			//printf("%d ",temp->next->e);
+			if(temp->next->e==a){
+				return true;
+			}
+			enqueue(qq,temp->next);
+		}
+	}
+	return false;
 }
