@@ -54,6 +54,7 @@ int main(){
 				printf("Enter what to search:");
 				scanf("%d",&opt);
 				check=search(root,opt);
+				
 				if(check)
 					printf("Found!\n");
 				else
@@ -159,6 +160,7 @@ void print(struct tree* root){
 	}
 	printf("\n");
 }
+
 bool search(struct tree* root,int a){
 	struct queue* qq;
 	//qq=(struct queue*)malloc(10*sizeof(struct queue));				
