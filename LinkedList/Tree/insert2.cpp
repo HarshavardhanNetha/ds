@@ -318,41 +318,48 @@ struct tree* find_tail(struct tree* root){
 				enqueue(qq,temp->prev);
 			}
 			else
-				return temp->prev;
+				return temp;
 			if(temp->next!=NULL){
 				enqueue(qq,temp->next);
 			}
 			else
-				return temp->next;
+				return temp;
 		}
 	}
 }
 
 struct tree* removed(struct tree* find_tail, struct tree* find_add, struct tree* root){
+	
+	int val;
+	if(find_tail->prev==NULL)
+		val=find_tail->e;
+	else
+		val=find_tail->prev->e;
 	struct queue* qq;
-	if(root==find_add)
-		root->e=find_add->e;
-	//qq=(struct queue*)malloc(10*sizeof(struct queue));				
-	struct tree* temp;
+	struct tree* temp=root;
 	temp=(struct tree*)malloc(sizeof(struct tree));
+	if(temp==find_add)
+		temp->e=val;
+	qq=(struct queue*)malloc(30*sizeof(struct queue));				
+	
 	qq->front=0;
 	qq->rear=0;
 	
-	qq=enqueue(qq,root);
-	
+	qq=enqueue(qq,temp);
+	printf("check2\n");
 	while(!isEmpty(qq)){
 		temp=dequeue(&qq);
 		
 		if(temp->prev!=NULL){
 			if(temp->prev==find_add){
-				temp->prev->e=find_tail->e;
+				temp->prev->e=val;
 				break;
 			}
 			enqueue(qq,temp->prev);
 		}
 		if(temp->next!=NULL){
 			if(temp->next==find_add){
-				temp->next->e=find_tail->e;
+				temp->next->e=val;
 				break;
 			}
 			enqueue(qq,temp->next);
