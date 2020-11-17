@@ -19,6 +19,9 @@ struct tree* dequeue(struct queue**);
 void print(struct tree*);
 bool search(struct tree*,int);
 struct tree* remove(struct tree*,int);
+struct tree* removed(struct tree*,struct tree*,struct tree*);
+struct tree* find_tail(struct tree*);
+struct tree* find_add(struct tree*,int);
 
 bool isEmpty(struct queue* q){
 	if(q->front==q->rear)
@@ -65,7 +68,12 @@ int main(){
 				int ele;
 				printf("What to remove:");
 				scanf("%d",&ele);
-				root=remove(root,ele);
+				struct tree* temp_add,*find_last;
+				temp_add=find_add(root,ele);
+				find_last=find_tail(root);
+				printf("%d %d\n",temp_add,find_tail);
+				root=removed(temp_add,find_last,root);
+				//root=remove(root,ele);
 				break;
 			}
 			case 5:{
@@ -98,7 +106,7 @@ struct tree* insert(struct tree* root,int ele, struct queue* q){
 		new_node->next=NULL;
 		new_node->prev=NULL;
 			
-		while(!isEmpty(root)){
+		while(!isEmpty(q)){
 			temp=dequeue(&q);
 			
 			if(temp->prev!=NULL){
@@ -254,4 +262,104 @@ struct tree* remove(struct tree* root,int x){
 	}
 	return root;
 	
+}
+
+struct tree* find_add(struct tree* root,int x){
+	if(root==NULL){
+		return NULL;
+	}
+	else{
+		struct queue* qq;
+		//qq=(struct queue*)malloc(10*sizeof(struct queue));				
+		struct tree* temp;
+		qq->front=0;
+		qq->rear=0;
+		
+		if(root->e==x)
+			return root;
+
+		qq=enqueue(qq,root);
+		
+		while(!isEmpty(qq)){
+			temp=dequeue(&qq);
+			
+			if(temp->prev!=NULL){
+				if(temp->prev->e==x)
+					return temp->prev;
+				enqueue(qq,temp->prev);
+			}
+			if(temp->next!=NULL){
+				if(temp->next->e==x)
+					return temp->next;
+				enqueue(qq,temp->next);
+			}
+		}
+		return NULL;
+	}
+	
+}
+struct tree* find_tail(struct tree* root){
+	if(root==NULL){
+		return NULL;
+	}
+	else{
+		struct queue* qq;
+		//qq=(struct queue*)malloc(10*sizeof(struct queue));				
+		struct tree* temp;
+		qq->front=0;
+		qq->rear=0;
+		
+		qq=enqueue(qq,root);
+		
+		while(!isEmpty(qq)){
+			temp=dequeue(&qq);
+			
+			if(temp->prev!=NULL){
+				enqueue(qq,temp->prev);
+			}
+			else
+				return temp->prev;
+			if(temp->next!=NULL){
+				enqueue(qq,temp->next);
+			}
+			else
+				return temp->next;
+		}
+	}
+}
+
+struct tree* removed(struct tree* find_tail, struct tree* find_add, struct tree* root){
+	struct queue* qq;
+	if(root==find_add)
+		root->e=find_add->e;
+	//qq=(struct queue*)malloc(10*sizeof(struct queue));				
+	struct tree* temp;
+	temp=(struct tree*)malloc(sizeof(struct tree));
+	qq->front=0;
+	qq->rear=0;
+	
+	qq=enqueue(qq,root);
+	
+	while(!isEmpty(qq)){
+		temp=dequeue(&qq);
+		
+		if(temp->prev!=NULL){
+			if(temp->prev==find_add){
+				temp->prev->e=find_tail->e;
+				break;
+			}
+			enqueue(qq,temp->prev);
+		}
+		if(temp->next!=NULL){
+			if(temp->next==find_add){
+				temp->next->e=find_tail->e;
+				break;
+			}
+			enqueue(qq,temp->next);
+		}
+	}
+	//find_add=(struct tree*)malloc(sizeof(struct tree));
+	//find_add->e=find_tail->e;
+	
+	return root;
 }
