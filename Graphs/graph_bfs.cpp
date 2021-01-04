@@ -40,12 +40,9 @@ int main(){
 	}
 	printf("\n");
 	int temp=0;
-	//*q=enqueue(q,temp);
 	
-	for(i=0;i<10;i++){
-		*q=enqueue(q,i);
-	}
-	
+	*q=enqueue(q,temp);
+
 	//bfs
 	
 	while(!isempty(q)){
@@ -54,12 +51,13 @@ int main(){
 			v[k]=1;
 			printf("%d ",k);
 			for(j=0;j<n;j++){
-				if(a[k][j]==1 && v[k]==0){
+				if(a[k][j]==1 && v[j]==0){
 					*q=enqueue(q,j);
 				}
 			}
 		}
 	} 
+		
 	return 0;
 }
 
