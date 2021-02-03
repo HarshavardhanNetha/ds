@@ -1,3 +1,7 @@
+//program to demonstrate basic stack with no global variables
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

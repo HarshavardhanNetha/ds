@@ -1,3 +1,7 @@
+//program to demonstrate queue with basic array and no functions
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

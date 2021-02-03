@@ -1,3 +1,7 @@
+//program to demonstrate queue with structure pointer
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

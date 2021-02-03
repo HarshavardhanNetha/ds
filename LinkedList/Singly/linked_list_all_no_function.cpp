@@ -1,3 +1,7 @@
+//program to demonstrate linked list without functions
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

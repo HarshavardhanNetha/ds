@@ -1,4 +1,8 @@
-//done call by reference
+//call by reference
+//program to demonstrate stack with structure and pointer using functions
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,4 +1,7 @@
-//queue with LI
+//program to demonstrate queue with linked list
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

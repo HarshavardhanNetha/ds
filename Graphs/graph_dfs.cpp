@@ -1,3 +1,6 @@
+//program to perform depth first search
+//b171325
+//Harsha
 #include <stdio.h>
 #include <stdlib.h>
 

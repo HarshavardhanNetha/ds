@@ -1,3 +1,7 @@
+//program to demonstrate stack with simple do while
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,4 +1,8 @@
 //done
+//program to demonstrate application of stack i.e infix and postfix
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

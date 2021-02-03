@@ -1,4 +1,8 @@
 //done
+//program to demonstrate stack with structure and array
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 

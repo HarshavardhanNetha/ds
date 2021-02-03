@@ -1,4 +1,8 @@
 //done size taken static
+//program to demonstrate queue with functions
+//b171325
+//Harsha
+
 #include <stdio.h>
 #include <stdlib.h>
 
